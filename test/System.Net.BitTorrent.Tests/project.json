@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0-*",
+  "testRunner": "xunit",
+  "dependencies": {
+    "BitTorrent": "1.0.0-*",
+    "BitTorrent.Dht": "1.0.0-*",
+    "xunit": "2.2.0-beta4-build3444"
+  },
+  "runtimes": {
+    "win10-x64": {},
+    "win81-x64": {},
+    "win8-x64": {},
+    "win7-x64": {}
+  },
+  "frameworks": {
+    "netcoreapp1.0": {
+      "dependencies": {
+        "Microsoft.NETCore.App": "1.0.1",
+        "System.Reflection": "4.3.0-preview1-24530-04",
+        "dotnet-test-xunit": "2.2.0-preview2-build1029"
+      },
+      "buildOptions": {
+        "define": [
+          "IS_CORECLR"
+        ]
+      }
+    },
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Runtime": {
+          "type": "build",
+          "version": "4.0.0"
+        },
+        "System.Threading.Tasks": {
+          "type": "build",
+          "version": "4.0.0"
+        }
+      },
+      "buildOptions": {
+        "define": [
+          "IS_DESKTOP"
+        ]
+      }
+    }
+  }
+}

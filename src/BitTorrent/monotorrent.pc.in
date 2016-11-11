@@ -1,0 +1,7 @@
+Name: System.Net.BitTorrent
+Description: System.Net.BitTorrent
+Version: @monotorrent_version@
+
+Requires: 
+Libraries=@monotorrent_install_dir@/System.Net.BitTorrent.dll
+Libs: -r:System.Net.BitTorrent.dll

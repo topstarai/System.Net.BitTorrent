@@ -1,0 +1,7 @@
+Name: System.Net.BitTorrent.Dht
+Description: System.Net.BitTorrent.Dht
+Version: @monotorrent_version@
+
+Requires: 
+Libraries=@monotorrent_install_dir@/System.Net.BitTorrent.Dht.dll
+Libs: -r:System.Net.BitTorrent.Dht.dll
