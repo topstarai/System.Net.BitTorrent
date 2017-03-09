@@ -1,26 +1,23 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{4B52F390-2A5B-4637-A8D3-CA6A2F8EA42B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{396241BC-40B1-4950-A655-5E05F6977265}"
-	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
-	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "System.Net.BitTorrent", "src\BitTorrent\System.Net.BitTorrent.xproj", "{858967C6-4265-4129-B942-060E3CC80D06}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "System.Net.BitTorrent.Dht", "src\BitTorrent.Dht\System.Net.BitTorrent.Dht.xproj", "{9615EE46-C8CB-452C-8043-7F5B249108B0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D15B2D71-89D3-4282-ABA5-8D64D6EA3FD4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitTorrent", "src\BitTorrent\BitTorrent.csproj", "{858967C6-4265-4129-B942-060E3CC80D06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitTorrent.Dht", "src\BitTorrent.Dht\BitTorrent.Dht.csproj", "{9615EE46-C8CB-452C-8043-7F5B249108B0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BitTorrent.Tests", "test\BitTorrent.Tests\BitTorrent.Tests.csproj", "{526928D8-DBC8-4717-BCF0-A4FEDA80A0BD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "SampleClient", "src\SampleClient\SampleClient.xproj", "{D118A2E3-4B24-4C73-AF38-5C7A4CD90FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleClient", "src\SampleClient\SampleClient.csproj", "{D118A2E3-4B24-4C73-AF38-5C7A4CD90FF3}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "System.Net.BitTorrent.Tests", "test\System.Net.BitTorrent.Tests\System.Net.BitTorrent.Tests.xproj", "{6B302ADC-B745-4C9F-9191-9DAF942D1AD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "System.Net.BitTorrent.Tests", "test\System.Net.BitTorrent.Tests\System.Net.BitTorrent.Tests.csproj", "{6B302ADC-B745-4C9F-9191-9DAF942D1AD9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DhtSampleClient", "src\DhtSampleClient\DhtSampleClient.csproj", "{19777ED5-79FD-4D05-B839-B178A875BF42}"
 EndProject
