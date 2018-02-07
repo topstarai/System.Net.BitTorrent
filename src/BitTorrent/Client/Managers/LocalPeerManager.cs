@@ -69,7 +69,7 @@ namespace System.Net.BitTorrent.Client
 
         public void Dispose()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             socket.Dispose();
 #else
             socket.Close();

@@ -36,7 +36,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using System.Net.BitTorrent.Common;
 using System.IO;
-#if IS_CORECLR
+#if NETSTANDARD1_5
 using System.Net.Http;
 #endif
 
@@ -87,7 +87,7 @@ namespace System.Net.BitTorrent.Client.Tracker
             {
                 Uri announceString = CreateAnnounceString(parameters);
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(announceString);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 request.Headers["User-Agent"] = System.Net.BitTorrent.Common.VersionInfo.ClientVersion;
 #else
                 request.UserAgent = System.Net.BitTorrent.Common.VersionInfo.ClientVersion;
@@ -215,7 +215,7 @@ namespace System.Net.BitTorrent.Client.Tracker
                             dataStream.Write(buffer, 0, bytesRead);
                     }
                 }
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 response.Dispose();
 #else
                 response.Close();
@@ -305,7 +305,7 @@ namespace System.Net.BitTorrent.Client.Tracker
                     url += "&info_hash=" + parameters.InfoHash.UrlEncode ();
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 request.Headers["User-Agent"] = System.Net.BitTorrent.Common.VersionInfo.ClientVersion;
 #else
                 request.UserAgent = System.Net.BitTorrent.Common.VersionInfo.ClientVersion;

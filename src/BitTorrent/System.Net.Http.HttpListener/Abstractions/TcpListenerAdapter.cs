@@ -79,7 +79,7 @@ namespace System.Net.Http.Abstractions
 
         public void Dispose()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             this.tcpClient.Dispose();
 #else
             this.tcpClient.Close();

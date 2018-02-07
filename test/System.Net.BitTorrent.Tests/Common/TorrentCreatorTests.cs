@@ -26,7 +26,7 @@ namespace System.Net.BitTorrent.Common
     {
         public TorrentCreatorFixture()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
             HashAlgoFactory.Register<SHA1, SHA1Fake>();
 #endif
@@ -34,7 +34,7 @@ namespace System.Net.BitTorrent.Common
 
         public void Dispose()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
             HashAlgoFactory.Register<SHA1, SHA1CryptoServiceProvider>();
 #endif
@@ -123,7 +123,7 @@ namespace System.Net.BitTorrent.Common
         [Fact]
         public void CreateSingleFromFolder()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             System.Reflection.Assembly assembly = this.GetType().GetTypeInfo().Assembly;
 #else
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();

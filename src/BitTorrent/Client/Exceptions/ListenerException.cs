@@ -67,7 +67,7 @@ namespace System.Net.BitTorrent.Client
         {
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         /// <summary>
         /// 

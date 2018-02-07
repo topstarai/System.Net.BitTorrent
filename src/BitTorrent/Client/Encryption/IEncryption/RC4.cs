@@ -40,7 +40,7 @@ namespace System.Net.BitTorrent.Client.Encryption
     /// </summary>
     public class RC4 : IEncryption
     {
-#if IS_CORECLR
+#if NETSTANDARD1_5
         static RandomNumberGenerator random = RandomNumberGenerator.Create();
 #else
         static RandomNumberGenerator random = new RNGCryptoServiceProvider();

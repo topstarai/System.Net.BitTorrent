@@ -341,7 +341,7 @@ namespace System.Net.BitTorrent.Client
             byte[] hashBuffer = BufferManager.EmptyBuffer;
             ClientEngine.BufferManager.GetBuffer(ref hashBuffer, Piece.BlockSize);
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             SHA1 hasher = SHA1.Create();
 #else
             SHA1 hasher = HashAlgoFactory.Create<SHA1>();
@@ -353,7 +353,7 @@ namespace System.Net.BitTorrent.Client
 
                 if (successful)
                 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     var h = hasher.ComputeHash(hashBuffer, 0, count);
                     h.CopyTo(hashBuffer, 0);
 #else
@@ -367,7 +367,7 @@ namespace System.Net.BitTorrent.Client
                     object hash = null;
                     if (successful)
                     {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         hash = hasher.ComputeHash(hashBuffer, 0, 0);
 #else
                         hasher.TransformFinalBlock(hashBuffer, 0, 0);

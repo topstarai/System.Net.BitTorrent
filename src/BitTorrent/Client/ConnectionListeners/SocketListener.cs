@@ -42,7 +42,7 @@ namespace System.Net.BitTorrent.Client
     /// </summary>
     public class SocketListener : PeerListener
     {
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         private AsyncCallback endAcceptCallback;
 #endif
@@ -51,13 +51,13 @@ namespace System.Net.BitTorrent.Client
         public SocketListener(IPEndPoint endpoint)
             : base(endpoint)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
             this.endAcceptCallback = EndAccept;
 #endif
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private async void EndAccept(Socket result, Socket listenerSocket)
 #else
         private void EndAccept(IAsyncResult result)
@@ -66,7 +66,7 @@ namespace System.Net.BitTorrent.Client
             Socket peerSocket = null;
             try
             {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 Socket listener = listenerSocket;//(Socket)result.AsyncState;
                 peerSocket = result;//listener.EndAccept(result);
 #else
@@ -90,7 +90,7 @@ namespace System.Net.BitTorrent.Client
             {
                 // Just dump the connection
                 if (peerSocket != null)
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     peerSocket.Dispose();
 #else
                     peerSocket.Close();
@@ -106,7 +106,7 @@ namespace System.Net.BitTorrent.Client
                 {
                     if (Status == ListenerStatus.Listening)
                     {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         var r = await listener.AcceptAsync();
                         EndAccept(r, listener);
 #else
@@ -121,7 +121,7 @@ namespace System.Net.BitTorrent.Client
             }
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         public async override void Start()
 #else
         public override void Start()
@@ -135,7 +135,7 @@ namespace System.Net.BitTorrent.Client
                 listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 listener.Bind(Endpoint);
                 listener.Listen(6);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 var acceptTask = listener.AcceptAsync();
                 RaiseStatusChanged(ListenerStatus.Listening);
                 var result = await acceptTask;
@@ -156,7 +156,7 @@ namespace System.Net.BitTorrent.Client
             RaiseStatusChanged(ListenerStatus.NotListening);
 
             if (listener != null)
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 listener.Dispose();
 #else
                 listener.Close();

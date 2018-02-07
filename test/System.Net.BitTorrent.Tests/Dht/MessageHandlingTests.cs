@@ -58,7 +58,7 @@ namespace System.Net.BitTorrent.Dht
             Assert.Equal(NodeState.Unknown, node.State);
 
             DateTime lastSeen = node.LastSeen;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(1000), "#1a");
 #else
             Assert.True(handle.WaitOne(1000, false), "#1a");
@@ -88,7 +88,7 @@ namespace System.Net.BitTorrent.Dht
             PingResponse response = new PingResponse(node.Id, transactionId);
             listener.RaiseMessageReceived(response, node.EndPoint);
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(1000), "#0");
 #else
             Assert.True(handle.WaitOne(1000, true), "#0");

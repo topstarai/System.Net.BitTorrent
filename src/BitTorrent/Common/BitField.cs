@@ -39,7 +39,7 @@ namespace System.Net.BitTorrent.Common
     /// <summary>
     /// This class is for represting the Peer's bitfield
     /// </summary>
-#if IS_CORECLR
+#if NETSTANDARD1_5
     public class BitField :Object, IEnumerable<bool>
 #else
     public class BitField : ICloneable, IEnumerable<bool>
@@ -109,7 +109,7 @@ namespace System.Net.BitTorrent.Common
             internal set { this.Set(index, value); }
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         object ICloneable.Clone()
         {

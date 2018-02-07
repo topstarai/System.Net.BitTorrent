@@ -155,7 +155,7 @@ namespace System.Net.BitTorrent.Client
 
         void Wait(WaitHandle handle)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(1000000), "Wait handle failed to trigger");
 #else
             Assert.True(handle.WaitOne(1000000, true), "Wait handle failed to trigger");

@@ -115,7 +115,7 @@ namespace System.Net.BitTorrent.Client
             InitiateTransfer(pair.Outgoing);
             pair.Outgoing.EndSend(pair.Outgoing.BeginSend(new byte[] { 255 >> 1, 255, 255, 250 }, 0, 4, null, null));
             IAsyncResult result = pair.Outgoing.BeginReceive(new byte[1000], 0, 1000, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (!result.AsyncWaitHandle.WaitOne(1000))
 #else
             if (!result.AsyncWaitHandle.WaitOne(1000, true))
@@ -134,7 +134,7 @@ namespace System.Net.BitTorrent.Client
             InitiateTransfer(pair.Outgoing);
             pair.Outgoing.EndSend(pair.Outgoing.BeginSend(new byte[] { 255, 255, 255, 250 }, 0, 4, null, null));
             IAsyncResult result = pair.Outgoing.BeginReceive(new byte[1000], 0, 1000, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (!result.AsyncWaitHandle.WaitOne(1000))
 #else
             if (!result.AsyncWaitHandle.WaitOne(1000, true))

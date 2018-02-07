@@ -32,19 +32,19 @@ namespace System.Net.BitTorrent.Client
         public void AcceptThree()
         {
             using (TcpClient c = new TcpClient(AddressFamily.InterNetwork))
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 c.ConnectAsync(endpoint.Address,endpoint.Port);
 #else
             c.Connect(endpoint);
 #endif
             using (TcpClient c = new TcpClient(AddressFamily.InterNetwork))
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 c.ConnectAsync(endpoint.Address, endpoint.Port);
 #else
             c.Connect(endpoint);
 #endif
             using (TcpClient c = new TcpClient(AddressFamily.InterNetwork))
-#if IS_CORECLR
+#if NETSTANDARD1_5
             c.ConnectAsync(endpoint.Address, endpoint.Port);
 #else
             c.Connect(endpoint);

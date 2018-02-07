@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace System.Net.BitTorrent.Common
 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
     public class BitTorrentCollection<T> : List<T>
 #else
     public class BitTorrentCollection<T> : List<T>, ICloneable
@@ -29,7 +29,7 @@ namespace System.Net.BitTorrent.Common
 
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         object ICloneable.Clone()
         {

@@ -39,7 +39,7 @@ namespace System.Net.BitTorrent.Client
     /// Represents the Settings which need to be passed to the engine
     /// </summary>
     [Serializable]
-#if IS_CORECLR
+#if NETSTANDARD1_5
     public class EngineSettings
 #else
     public class EngineSettings : ICloneable
@@ -205,7 +205,7 @@ namespace System.Net.BitTorrent.Client
 
 
         #region Methods
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         object ICloneable.Clone()
         {

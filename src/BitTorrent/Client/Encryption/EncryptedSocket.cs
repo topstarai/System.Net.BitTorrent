@@ -144,7 +144,7 @@ namespace System.Net.BitTorrent.Client.Encryption
 
         public EncryptedSocket(EncryptionTypes allowedEncryption)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             random = RandomNumberGenerator.Create();
             hasher = SHA1.Create();
 #else

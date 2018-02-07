@@ -141,7 +141,7 @@ namespace Mono.Ssdp.Internal
             
             while (true) {
                 if (disposed) {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     wait.Dispose();
 #else
                     wait.Close();
@@ -160,7 +160,7 @@ namespace Mono.Ssdp.Internal
                     interval = TimeSpan.Zero;
                 }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 if (!wait.WaitOne(interval) && hasItem)
                 {
 #else
@@ -199,7 +199,7 @@ namespace Mono.Ssdp.Internal
                 return;
             }
             Clear ();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             wait.Dispose();
 #else
             wait.Close ();

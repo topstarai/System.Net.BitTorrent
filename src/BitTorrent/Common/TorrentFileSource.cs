@@ -78,7 +78,7 @@ namespace System.Net.BitTorrent.Common
 
             // Turn the full path of each file into a full path + relative path. The relative path is the 'path'
             // which the file will have within the .torrent metadata.
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Files = files.ConvertAll<string, FileMapping>(delegate (string file) {
                 return new FileMapping(file, file.Substring(fullPath.Length));
             });

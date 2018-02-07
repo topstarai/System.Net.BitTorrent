@@ -50,7 +50,7 @@ namespace System.Net.BitTorrent.Client
         /// </summary>
         public FileManagerTest()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
 
             this.path = typeof(FileManagerTest).GetTypeInfo().Assembly.Location;
 #else
@@ -84,7 +84,7 @@ namespace System.Net.BitTorrent.Client
             for (int i = 0; i < 5000; i++)
                 file2.Write(System.Text.Encoding.UTF8.GetBytes(data), 0, System.Text.Encoding.UTF8.GetByteCount(data));
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             file1.Dispose();
             file2.Dispose();
 #else

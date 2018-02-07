@@ -29,7 +29,7 @@
 using System;
 using System.IO;
 using System.Net;
-#if IS_CORECLR
+#if NETSTANDARD1_5
 using System.Net.Http;
 #endif
 using System.Text;
@@ -46,7 +46,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
         #region Fields
 
         private string prefix;
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private System.Net.Http.HttpListener listener;
         private IPAddress address;
         private int port;
@@ -74,7 +74,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
         public HttpListener(IPAddress address, int port)
             : this(string.Format("http://{0}:{1}/announce/", address, port))
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             this.address = address;
             this.port = port;
 #endif
@@ -107,7 +107,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
             if (Running)
                 return;
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener = new System.Net.Http.HttpListener(address, port);
             listener.Start();
             var context = await listener.GetContextAsync();
@@ -133,7 +133,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
             d.Dispose();
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private async void EndGetRequest(HttpListenerContext context, System.Net.Http.HttpListener listener)
         {
             try
@@ -196,7 +196,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
 
         private void HandleRequest(HttpListenerContext context)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             bool isScrape = context.Request.RequestUri.AbsolutePath.StartsWith("/scrape", StringComparison.OrdinalIgnoreCase);
 
             BEncodedValue responseData = Handle(context.Request.RequestUri.AbsolutePath, context.Request.RemoteEndpoint.Address, isScrape);

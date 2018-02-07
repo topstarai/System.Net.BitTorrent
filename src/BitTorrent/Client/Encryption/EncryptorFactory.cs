@@ -160,7 +160,7 @@ namespace System.Net.BitTorrent.Client.Encryption
             r.Id.Decryptor = r.Decryptor;
             initialData = r.InitialData;
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             r.AsyncWaitHandle.Dispose();
 #else
             r.AsyncWaitHandle.Close();
@@ -233,7 +233,7 @@ namespace System.Net.BitTorrent.Client.Encryption
 
             r.Complete();
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             result.AsyncWaitHandle.Dispose();
             r.AsyncWaitHandle.Dispose();
 #else

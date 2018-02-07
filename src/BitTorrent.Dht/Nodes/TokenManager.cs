@@ -54,7 +54,7 @@ namespace System.Net.BitTorrent.Dht
 
         public TokenManager()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             sha1 = SHA1.Create();
             random = RandomNumberGenerator.Create();
             LastSecretGeneration = DateTime.MinValue; //in order to force the update
@@ -90,7 +90,7 @@ namespace System.Net.BitTorrent.Dht
             {
                 LastSecretGeneration = DateTime.UtcNow;
                 secret.CopyTo(previousSecret, 0);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 random.GetBytes(secret);
 #else
                 random.GetNonZeroBytes(secret);
@@ -99,7 +99,7 @@ namespace System.Net.BitTorrent.Dht
 
             byte[] n = node.CompactPort().TextBytes;
             sha1.Initialize();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             var h = sha1.ComputeHash(n, 0, n.Length);
             h.CopyTo(n, 0);
             h = sha1.ComputeHash(s, 0, s.Length);

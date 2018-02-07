@@ -609,7 +609,7 @@ namespace System.Net.BitTorrent.Common
         /// <param name="url">The URL to download the .torrent from</param>
         /// <param name="location">The path to download the .torrent to before it gets loaded</param>
         /// <returns></returns>
-#if IS_CORECLR
+#if NETSTANDARD1_5
         public static async Task<Torrent> Load(Uri url, string location)
 #else
         public static Torrent Load(Uri url, string location)
@@ -620,7 +620,7 @@ namespace System.Net.BitTorrent.Common
 
             try
             {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 using (HttpClient client = new HttpClient())
                 {
                     FileStream fs = null;
@@ -753,7 +753,7 @@ namespace System.Net.BitTorrent.Common
             
             try
             {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 var t = Torrent.Load(url, location);
                 torrent = t.GetAwaiter().GetResult();
 #else
@@ -888,7 +888,7 @@ namespace System.Net.BitTorrent.Common
                             break;
 
                         case ("info"):
-#if IS_CORECLR
+#if NETSTANDARD1_5
                             using (SHA1 s = System.Security.Cryptography.SHA1.Create())
 #else
                             using (SHA1 s = HashAlgoFactory.Create<SHA1>())

@@ -26,7 +26,7 @@ namespace System.Net.BitTorrent.Client.Tracker
             CanScrape = true;
             CanAnnounce = true;
             RetryDelay = TimeSpan.FromSeconds(15);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             var ipaddress = Dns.GetHostAddressesAsync(announceUrl.Host);
             ipaddress.Wait();
             IPEndPoint ip = new IPEndPoint(ipaddress.Result[0], announceUrl.Port);
@@ -157,7 +157,7 @@ namespace System.Net.BitTorrent.Client.Tracker
        private void Connect(UdpTrackerAsyncState connectState)
        {
            connectState.Message = new ConnectMessage();
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
             tracker.Connect(Uri.Host, Uri.Port);
 #endif
@@ -332,7 +332,7 @@ namespace System.Net.BitTorrent.Client.Tracker
        {
            //TODO BeginSend
            byte[] buffer = requestState.Message.Encode();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             tracker.SendAsync(buffer, buffer.Length, endpoint);
 #else
            tracker.Send(buffer, buffer.Length);
@@ -349,7 +349,7 @@ namespace System.Net.BitTorrent.Client.Tracker
                    timeout++;
                    try
                    {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                        tracker.SendAsync(buffer, buffer.Length, endpoint);
 #else
                        tracker.Send(buffer, buffer.Length);

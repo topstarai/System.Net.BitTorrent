@@ -22,7 +22,7 @@ namespace System.Net.BitTorrent.Client
             names.Add (name);
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         protected override void Dispose(bool explicitDisposing)
         {
             base.Dispose(explicitDisposing);

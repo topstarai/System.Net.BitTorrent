@@ -46,7 +46,7 @@ namespace System.Net.BitTorrent.Client
 
         public override void Tick(int counter)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (handle.WaitOne(0))
             {
                 handle.Dispose();

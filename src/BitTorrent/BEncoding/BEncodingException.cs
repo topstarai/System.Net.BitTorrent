@@ -52,7 +52,7 @@ namespace System.Net.BitTorrent.BEncoding
         {
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #elif IS_DESKTOP
        protected BEncodingException(SerializationInfo info, StreamingContext context)
             :base(info, context)

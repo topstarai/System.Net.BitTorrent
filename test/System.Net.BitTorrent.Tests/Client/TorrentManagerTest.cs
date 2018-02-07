@@ -120,13 +120,13 @@ namespace System.Net.BitTorrent.Client
             };
 
             rig.Manager.Start();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(h.WaitOne(5000), "Started");
 #else
             Assert.True (h.WaitOne(5000, true), "Started");
 #endif
             rig.Manager.Stop();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(h.WaitOne(5000), "Stopped");
 #else
             Assert.True (h.WaitOne(5000, true), "Stopped");
@@ -153,7 +153,7 @@ namespace System.Net.BitTorrent.Client
             System.Threading.Thread.Sleep(1000);
             manager.Stop();
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(10000), "#1");
             Assert.True(manager.TrackerManager.Announce().WaitOne(10000), "#2"); ;
 #else
@@ -187,7 +187,7 @@ namespace System.Net.BitTorrent.Client
             };
 
             rig.Manager.Start();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "Announce on startup");
 #else
             Assert.True (handle.WaitOne(5000, false), "Announce on startup");
@@ -195,7 +195,7 @@ namespace System.Net.BitTorrent.Client
             Assert.Equal(1, rig.Tracker.AnnouncedAt.Count);
 
             rig.Manager.Bitfield.SetAll(true);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "Announce when download completes");
 #else
             Assert.True (handle.WaitOne (5000, false), "Announce when download completes");
@@ -204,7 +204,7 @@ namespace System.Net.BitTorrent.Client
             Assert.Equal(2, rig.Tracker.AnnouncedAt.Count);
 
             rig.Manager.Stop();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "Announce when torrent stops");
 #else
             Assert.True (handle.WaitOne (5000, false), "Announce when torrent stops");

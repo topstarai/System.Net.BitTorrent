@@ -53,7 +53,7 @@ namespace System.Net.BitTorrent.Client
         }
 
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         public ProtocolException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)

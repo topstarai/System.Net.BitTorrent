@@ -39,7 +39,7 @@ namespace System.Net.BitTorrent.Client
     public static class AllowedFastAlgorithm
     {
         internal static readonly int AllowedFastPieceCount = 10;
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private static SHA1 hasher = SHA1.Create();
 #else
         private static SHA1 hasher = HashAlgoFactory.Create<SHA1>();

@@ -49,7 +49,7 @@ namespace System.Net.BitTorrent.Client.Connections
 {
     public partial class HttpConnection : IConnection
     {
-#if IS_CORECLR
+#if NETSTANDARD1_5
         static MethodInfo method = typeof(WebHeaderCollection).GetTypeInfo().GetMethod
                                 ("AddWithoutValidate", BindingFlags.Instance | BindingFlags.NonPublic);
 #else
@@ -229,7 +229,7 @@ namespace System.Net.BitTorrent.Client.Connections
                 }
                 else if (bundle.TrueForAll(delegate(PeerMessage m) { return m is RequestMessage; }))
                 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     var mesList = bundle.ConvertAll<PeerMessage,RequestMessage>(delegate (PeerMessage m) { return (RequestMessage)m; });
 #else
                     var mesList = bundle.ConvertAll< RequestMessage > (delegate (PeerMessage m) { return (RequestMessage)m; });

@@ -52,7 +52,7 @@ namespace System.Net.BitTorrent.Dht
             SendQueryTask task = new SendQueryTask(engine, ping, node);
             task.Completed += delegate { handle.Set(); };
             task.Execute();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(3000), "#1");
 #else
             Assert.True(handle.WaitOne(3000, false), "#1");
@@ -81,7 +81,7 @@ namespace System.Net.BitTorrent.Dht
             task.Completed += delegate { handle.Set(); };
             task.Execute();
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(3000), "#1");
 #else
             Assert.True(handle.WaitOne(3000, false), "#1");
@@ -140,7 +140,7 @@ namespace System.Net.BitTorrent.Dht
             task.Completed += delegate(object o, TaskCompleteEventArgs e) { handle.Set(); };
             task.Execute();
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(4000), "#10");
 #else
             Assert.True(handle.WaitOne(4000, false), "#10");
@@ -208,7 +208,7 @@ namespace System.Net.BitTorrent.Dht
             ReplaceNodeTask task = new ReplaceNodeTask(engine, engine.RoutingTable.Buckets[0], replacement);
             task.Completed += delegate { handle.Set(); };
             task.Execute();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(1000), "#a");
 #else
             Assert.True(handle.WaitOne(1000, true), "#a");

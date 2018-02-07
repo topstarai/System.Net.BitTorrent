@@ -181,7 +181,7 @@ namespace System.Net.BitTorrent.Client
 
         void CheckFail()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "Failure was not handled");
 #else
             Assert.True(handle.WaitOne(5000, true), "Failure was not handled");
@@ -190,7 +190,7 @@ namespace System.Net.BitTorrent.Client
 
         public void Dispose()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             handle.Dispose();
 #else
             handle.Close();

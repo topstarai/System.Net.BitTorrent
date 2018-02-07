@@ -132,9 +132,9 @@ namespace SampleClient
             throw new InvalidOperationException();
         }
 
-        public IAsyncResult BeginReceive(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceive(byte[] buffer, int offset, int count,AsyncCallback callback, object state)
         {
-            return s.BeginReceive(buffer, offset, count, callback, state);
+            return s.BeginReceive(buffer, offset, count, SocketFlags.None, callback, state);
         }
 
         public int EndReceive(IAsyncResult result)
@@ -145,7 +145,7 @@ namespace SampleClient
 
         public IAsyncResult BeginSend(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
         {
-            return s.BeginSend(buffer, offset, count, callback, state);
+            return s.BeginSend(buffer, offset, count, SocketFlags.None, callback, state);
         }
 
         public int EndSend(IAsyncResult result)

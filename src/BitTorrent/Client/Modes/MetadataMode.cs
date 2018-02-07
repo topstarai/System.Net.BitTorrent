@@ -145,7 +145,7 @@ namespace System.Net.BitTorrent.Client
                     {
                         byte[] hash;
                         stream.Position = 0;
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         using (SHA1 hasher = SHA1.Create())
 
 #else
@@ -260,7 +260,7 @@ namespace System.Net.BitTorrent.Client
         internal System.Net.BitTorrent.Common.Torrent GetTorrent()
         {
             byte[] calculatedInfoHash;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             using (SHA1 sha = SHA1.Create())
 #else
             using (SHA1 sha = HashAlgoFactory.Create<SHA1>())

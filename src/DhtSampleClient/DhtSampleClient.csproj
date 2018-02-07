@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SampleClient</RootNamespace>
     <AssemblyName>SampleClient</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -55,12 +55,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BitTorrent">
-      <HintPath>..\BitTorrent.Dht\bin\Debug\net45\BitTorrent.dll</HintPath>
-    </Reference>
-    <Reference Include="BitTorrent.Dht">
-      <HintPath>..\BitTorrent.Dht\bin\Debug\net45\BitTorrent.Dht.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -80,7 +74,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BitTorrent.Dht\BitTorrent.Dht.csproj">
+      <Project>{9615ee46-c8cb-452c-8043-7f5b249108b0}</Project>
+      <Name>BitTorrent.Dht</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BitTorrent\BitTorrent.csproj">
+      <Project>{858967c6-4265-4129-b942-060e3cc80d06}</Project>
+      <Name>BitTorrent</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

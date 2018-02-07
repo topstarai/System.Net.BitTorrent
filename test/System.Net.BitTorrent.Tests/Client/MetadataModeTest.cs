@@ -83,7 +83,7 @@ namespace System.Net.BitTorrent.Client
 
             // 4) Verify the hash is the same.
             stream.Position = 0;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.Equal(rig.Torrent.InfoHash, new InfoHash(SHA1.Create().ComputeHash(stream)));
 #else
             Assert.Equal(rig.Torrent.InfoHash, new InfoHash(new SHA1Managed().ComputeHash(stream)));
@@ -100,7 +100,7 @@ namespace System.Net.BitTorrent.Client
         [Fact]
         public void SendMetadata_ToFolder()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Setup(true, Directory.GetCurrentDirectory());
             SendMetadataCore(Path.Combine(Directory.GetCurrentDirectory(), rig.Torrent.InfoHash.ToHex() + ".torrent"));
 #else
@@ -152,7 +152,7 @@ namespace System.Net.BitTorrent.Client
             byte[] b = message.Encode();
             encryptor.Encrypt(b);
             IAsyncResult result = connection.BeginSend(b, 0, b.Length, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (!result.AsyncWaitHandle.WaitOne(5000))
 #else
             if (!result.AsyncWaitHandle.WaitOne(5000, true))

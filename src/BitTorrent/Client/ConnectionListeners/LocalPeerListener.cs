@@ -50,7 +50,7 @@ namespace System.Net.BitTorrent.Client
             this.engine = engine;
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         public async override void Start()
 #else
         public override void Start()
@@ -62,7 +62,7 @@ namespace System.Net.BitTorrent.Client
             {
                 udpClient = new UdpClient(MulticastPort);
                 udpClient.JoinMulticastGroup(multicastIpAddress);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 var receive = await udpClient.ReceiveAsync();
                 OnReceiveCallBack(receive, udpClient);
 #else
@@ -85,13 +85,13 @@ namespace System.Net.BitTorrent.Client
             UdpClient c = udpClient;
             udpClient = null;
             if (c != null)
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 c.Dispose();
 #else
             c.Close();
 #endif
         }
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private async void OnReceiveCallBack(UdpReceiveResult ar, UdpClient client)
         {
             UdpClient u = client;

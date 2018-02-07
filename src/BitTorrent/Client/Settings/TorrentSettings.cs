@@ -33,7 +33,7 @@ using System;
 namespace System.Net.BitTorrent.Client
 {
     [Serializable]
-#if IS_CORECLR
+#if NETSTANDARD1_5
     public class TorrentSettings
 #else
     public class TorrentSettings : ICloneable
@@ -210,7 +210,7 @@ namespace System.Net.BitTorrent.Client
         #endregion
 
         #region Methods
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         object ICloneable.Clone()
         {

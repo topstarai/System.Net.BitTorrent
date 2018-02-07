@@ -83,7 +83,7 @@ namespace System.Net.BitTorrent.Client
                 // Ensure that we truncate existing files which are too large
                 if (s.Length > file.Length) {
                     if (!s.CanWrite) {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         s.Dispose();
 #else
                         s.Close();

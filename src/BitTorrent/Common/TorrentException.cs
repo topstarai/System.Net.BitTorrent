@@ -52,7 +52,7 @@ namespace System.Net.BitTorrent.Common
         {
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         public TorrentException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)

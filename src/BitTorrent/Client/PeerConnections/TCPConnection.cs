@@ -125,7 +125,7 @@ namespace System.Net.BitTorrent.Client.Connections
 
         public IAsyncResult BeginReceive(byte[] buffer, int offset, int count, AsyncCallback asyncCallback, object state)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             return this.socket.BeginReceive(buffer, offset, count, asyncCallback, state);
 #else
             return this.socket.BeginReceive(buffer, offset, count, SocketFlags.None, asyncCallback, state);
@@ -134,7 +134,7 @@ namespace System.Net.BitTorrent.Client.Connections
 
         public IAsyncResult BeginSend(byte[] buffer, int offset, int count, AsyncCallback asyncCallback, object state)
         { 
-            #if IS_CORECLR
+            #if NETSTANDARD1_5
                 return this.socket.BeginSend(buffer, offset, count,asyncCallback, state);
             #else
                 return this.socket.BeginSend(buffer, offset, count, SocketFlags.None, asyncCallback, state);

@@ -54,7 +54,7 @@ namespace System.Net.BitTorrent.Common
         static string CreateClientVersion ()
         {
             AssemblyInformationalVersionAttribute versionAttr;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assembly assembly = typeof(VersionInfo).GetTypeInfo().Assembly;
             versionAttr = assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 #else

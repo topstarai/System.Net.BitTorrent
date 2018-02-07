@@ -55,7 +55,7 @@ namespace System.Net.BitTorrent.Dht.Tasks
             {
                 try
                 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     Node utorrent = new Node(NodeId.Create(), new System.Net.IPEndPoint(Dns.GetHostEntryAsync("router.bittorrent.com").Result.AddressList[0], 6881));
 #else
                     Node utorrent = new Node(NodeId.Create(), new System.Net.IPEndPoint(Dns.GetHostEntry("router.bittorrent.com").AddressList[0], 6881));

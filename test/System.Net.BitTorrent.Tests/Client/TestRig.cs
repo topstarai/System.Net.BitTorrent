@@ -96,7 +96,7 @@ namespace System.Net.BitTorrent.Client
             AnnounceResponseEventArgs e = new AnnounceResponseEventArgs(this, id, true);
             e.Peers.Add(p);
             RaiseAnnounceComplete(e);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(id.WaitHandle.WaitOne(1000), "#1 Tracker never raised the AnnounceComplete event");
 #else
             Assert.True(id.WaitHandle.WaitOne(1000, true), "#1 Tracker never raised the AnnounceComplete event");
@@ -109,7 +109,7 @@ namespace System.Net.BitTorrent.Client
             AnnounceResponseEventArgs e = new AnnounceResponseEventArgs(this, id, false);
             e.Peers.Add(p);
             RaiseAnnounceComplete(e);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(id.WaitHandle.WaitOne(1000), "#2 Tracker never raised the AnnounceComplete event");
 #else
             Assert.True(id.WaitHandle.WaitOne(1000, true), "#2 Tracker never raised the AnnounceComplete event");
@@ -193,7 +193,7 @@ namespace System.Net.BitTorrent.Client
                 BeginReceiveStarted (this, EventArgs.Empty);
             if (SlowConnection)
                 count = 1;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             return s.BeginReceive(buffer, offset, count, callback, state);
 #else
             return s.BeginReceive(buffer, offset, count, SocketFlags.None, callback, state);
@@ -225,7 +225,7 @@ namespace System.Net.BitTorrent.Client
 
             if (SlowConnection)
                 count = 1;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             return s.BeginSend(buffer, offset, count, callback, state);
 #else
             return s.BeginSend(buffer, offset, count, SocketFlags.None, callback, state);
@@ -252,7 +252,7 @@ namespace System.Net.BitTorrent.Client
         //private bool disposed;
         public void Dispose()
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             s.Dispose();
 #else
             s.Close();
@@ -325,7 +325,7 @@ namespace System.Net.BitTorrent.Client
 
             Socket s1a = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             s1a.Connect(IPAddress.Loopback, port);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Socket s1b = socketListener.AcceptSocketAsync().GetAwaiter().GetResult();
 #else
             Socket s1b = socketListener.AcceptSocket();

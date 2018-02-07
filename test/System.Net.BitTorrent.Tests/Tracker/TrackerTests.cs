@@ -82,7 +82,7 @@ namespace System.Net.BitTorrent.Tracker
                                                                        infoHash, false, new string('1', 20), "", 1411);
                 tier.Trackers[0].Announce(parameters, id);
             }
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "Some of the responses weren't received");
 
 #else

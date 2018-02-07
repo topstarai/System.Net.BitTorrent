@@ -122,7 +122,7 @@ namespace System.Net.BitTorrent.Common {
 
             if (getrightHttpSeeds.Count > 0) {
                 BEncodedList seedlist = new BEncodedList ();
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 seedlist.AddRange(getrightHttpSeeds.ConvertAll<string, BEncodedValue>(delegate (string s) { return (BEncodedString)s; }));
 #else
                 seedlist.AddRange(getrightHttpSeeds.ConvertAll<BEncodedValue>(delegate (string s) { return (BEncodedString)s; }));
@@ -167,7 +167,7 @@ namespace System.Net.BitTorrent.Common {
             SHA1 shaHasher = null;
             List<byte> torrentHashes = null;
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
             shaHasher = SHA1.Create();
 #else
             shaHasher = HashAlgoFactory.Create<SHA1> ();
@@ -179,7 +179,7 @@ namespace System.Net.BitTorrent.Common {
             buffer = new byte [pieceLength];
 
             if (StoreMD5)
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 md5Hasher = MD5.Create();//HashAlgoFactory.Create<MD5> ();
 #else
                 md5Hasher = HashAlgoFactory.Create<MD5> ();
@@ -198,14 +198,14 @@ namespace System.Net.BitTorrent.Common {
 
                         if (md5Hasher != null)
                         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                             var hash = md5Hasher.ComputeHash(buffer, bufferRead, read);
                             hash.CopyTo(buffer, bufferRead);
 #else
                             md5Hasher.TransformBlock (buffer, bufferRead, read, buffer, bufferRead);
 #endif
                         }
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         var shaHash = shaHasher.ComputeHash(buffer, bufferRead, read);
                         shaHash.CopyTo(buffer, bufferRead);
 #else
@@ -218,7 +218,7 @@ namespace System.Net.BitTorrent.Common {
 
                         if (bufferRead == buffer.Length) {
                             bufferRead = 0;
-#if IS_CORECLR
+#if NETSTANDARD1_5
                             var hash = shaHasher.ComputeHash(buffer, 0, 0);
                             torrentHashes.AddRange(hash);
 #else
@@ -230,7 +230,7 @@ namespace System.Net.BitTorrent.Common {
                         RaiseHashed (new TorrentCreatorEventArgs (file.Path, fileRead, file.Length, overallRead, overallTotal));
                     }
                     if (md5Hasher != null) {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         var hash = md5Hasher.ComputeHash(buffer, 0, 0);
                         md5Hasher.Initialize();
                         file.MD5 = hash;
@@ -242,7 +242,7 @@ namespace System.Net.BitTorrent.Common {
                     }
                 }
                 if (bufferRead > 0) {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     var hash = shaHasher.ComputeHash(buffer, 0, 0);
                     torrentHashes.AddRange(hash);
 #else
@@ -251,7 +251,7 @@ namespace System.Net.BitTorrent.Common {
 #endif
                 }
             } finally {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 if (shaHasher != null)
                     shaHasher.Dispose();
                 if (md5Hasher != null)
@@ -324,7 +324,7 @@ namespace System.Net.BitTorrent.Common {
         void CreateMultiFileTorrent (BEncodedDictionary dictionary, List<TorrentFile> mappings, PieceWriter writer, string name)
         {
             BEncodedDictionary info = (BEncodedDictionary) dictionary ["info"];
-#if IS_CORECLR
+#if NETSTANDARD1_5
             List<BEncodedValue> files = mappings.ConvertAll<TorrentFile, BEncodedValue>(ToFileInfoDict).ToList();
 #else
             List<BEncodedValue> files = mappings.ConvertAll<BEncodedValue>(ToFileInfoDict);

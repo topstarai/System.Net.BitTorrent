@@ -51,7 +51,7 @@ namespace System.Net.BitTorrent.Client
             {
                 try
                 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     var uri = new Uri(listenerURL);
                     listener = new HttpListener(IPAddress.Parse(uri.Host),uri.Port);
 #else
@@ -66,7 +66,7 @@ namespace System.Net.BitTorrent.Client
 
                 }
             }
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener.BeginGetContext(GotContext, null);
 #else
             listener.BeginGetContext(GotContext, null);
@@ -106,7 +106,7 @@ namespace System.Net.BitTorrent.Client
         {
             Assert.Throws<WebException>(() => {
                 connection.ConnectionTimeout = TimeSpan.FromMilliseconds(100);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 listener.Dispose();
 #else
                 listener.Stop();
@@ -149,7 +149,7 @@ namespace System.Net.BitTorrent.Client
             int offset = 0;
             amountSent = Math.Min(sendBuffer.Length - offset, 2048);
             IAsyncResult sendResult = connection.BeginSend(sendBuffer, offset, amountSent, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             while (sendResult.AsyncWaitHandle.WaitOne(10))
 #else
             while (sendResult.AsyncWaitHandle.WaitOne(10, true))
@@ -236,7 +236,7 @@ namespace System.Net.BitTorrent.Client
             {
                 HttpListenerContext c = listener.EndGetContext(result);
                 Console.WriteLine("Got Context");
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 requestedUrl.Add(c.Request.RequestUri.OriginalString);
 #else
                 requestedUrl.Add(c.Request.Url.OriginalString);
@@ -255,13 +255,13 @@ namespace System.Net.BitTorrent.Client
                 bool exists = false;
                 string p;
                 if(rig.Manager.Torrent.Files.Length > 1)
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     p = c.Request.RequestUri.AbsoluteUri.Substring(10 + rig.Torrent.Name.Length + 1);
 #else
                     p = c.Request.RawUrl.Substring(10 + rig.Torrent.Name.Length + 1);
 #endif
                 else
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     p = c.Request.RequestUri.AbsoluteUri.Substring(10);
 #else
                     p = c.Request.RawUrl.Substring(10);
@@ -279,7 +279,7 @@ namespace System.Net.BitTorrent.Client
                 }
 
                 TorrentFile[] files = rig.Manager.Torrent.Files;
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 if (files.Length == 1 && rig.Torrent.GetRightHttpSeeds[0] == c.Request.RequestUri.OriginalString)
 #else
                 if (files.Length == 1 && rig.Torrent.GetRightHttpSeeds[0] == c.Request.Url.OriginalString)
@@ -299,7 +299,7 @@ namespace System.Net.BitTorrent.Client
                     byte[] data = partialData ? new byte[(end - start) / 2] : new byte[end - start + 1];
                     for (int i = 0; i < data.Length; i++)
                         data[i] = (byte)(globalStart + i);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     c.Response.Dispose();
 #else
                     c.Response.Close(data, false);
@@ -336,7 +336,7 @@ namespace System.Net.BitTorrent.Client
 
         void Wait(WaitHandle handle)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "WaitHandle did not trigger");
 #else
             Assert.True(handle.WaitOne(5000, true), "WaitHandle did not trigger");

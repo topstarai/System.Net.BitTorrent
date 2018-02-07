@@ -177,7 +177,7 @@ namespace System.Net.BitTorrent.Client
 
             rig.AddConnection(conn.Incoming);
             IAsyncResult result = a.BeginHandshake(conn.Outgoing, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (!result.AsyncWaitHandle.WaitOne(4000))
 #else
             if (!result.AsyncWaitHandle.WaitOne(4000, true))
@@ -214,7 +214,7 @@ namespace System.Net.BitTorrent.Client
 
             PeerBEncryption a = new PeerBEncryption(new InfoHash[] { rig.Manager.InfoHash }, EncryptionTypes.All);
             IAsyncResult result = a.BeginHandshake(conn.Incoming, null, null);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             if (!result.AsyncWaitHandle.WaitOne(4000))
 #else
             if (!result.AsyncWaitHandle.WaitOne(4000, true))
@@ -259,7 +259,7 @@ namespace System.Net.BitTorrent.Client
 
             WaitHandle[] handles = new WaitHandle[] { resultA.AsyncWaitHandle, resultB.AsyncWaitHandle };
             int count = 1000;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             while (!WaitHandle.WaitAll(handles, 5))
 #else
             while (!WaitHandle.WaitAll(handles, 5, true))

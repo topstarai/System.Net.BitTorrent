@@ -70,6 +70,7 @@ namespace System.Net.BitTorrent.Client
 
     public class UdpTrackerTests:IClassFixture<UdpTrackerFixture>
     {
+#if NotMicrosoftNETTestSdk
         static void Main(string[] args)
         {
             UdpTrackerTests t = new UdpTrackerTests();
@@ -82,6 +83,7 @@ namespace System.Net.BitTorrent.Client
             t.AnnounceTest();
             t.ScrapeTest();
         }
+#endif
 
         AnnounceParameters announceparams = new AnnounceParameters(100, 50, int.MaxValue,
             System.Net.BitTorrent.Common.TorrentEvent.Completed,
@@ -371,7 +373,7 @@ namespace System.Net.BitTorrent.Client
 
         void Wait(WaitHandle handle)
         {
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(1000000), "Wait handle failed to trigger");
 #else
             Assert.True(handle.WaitOne(1000000, true), "Wait handle failed to trigger");
@@ -404,7 +406,7 @@ namespace System.Net.BitTorrent.Client
                 base.ReceiveAnnounce(announceMessage);
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
 #else
         protected override void ReceiveError(ErrorMessage errorMessage)
         {

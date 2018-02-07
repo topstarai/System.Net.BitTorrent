@@ -38,7 +38,7 @@ using System.Net.BitTorrent.BEncoding;
 using System.Net.BitTorrent.Client.Messages.UdpTracker;
 using System.Net.BitTorrent.Client;
 using System.Collections.Generic;
-#if IS_CORECLR
+#if NETSTANDARD1_5
 using System.Net.Sockets;
 #endif
 
@@ -71,7 +71,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
         /// <summary>
         /// Starts listening for incoming connections
         /// </summary>
-#if IS_CORECLR
+#if NETSTANDARD1_5
         public async override void Start()
 #else
         public override void Start()
@@ -84,7 +84,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
             //Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             
             listener = new System.Net.Sockets.UdpClient(endpoint.Port);
-#if IS_CORECLR
+#if NETSTANDARD1_5
             var receive = await listener.ReceiveAsync();
             ReceiveData(receive, listener);
 #else
@@ -101,14 +101,14 @@ namespace System.Net.BitTorrent.Tracker.Listeners
                 return;
             System.Net.Sockets.UdpClient listener = this.listener;
             this.listener = null;
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener.Dispose();
 #else
             listener.Close();
 #endif
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
          private async void ReceiveData(UdpReceiveResult result,UdpClient client)
          {
             try
@@ -155,7 +155,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
             {
                 if (Running)
                 {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                     result = await listener.ReceiveAsync();
                     ReceiveData(result, client);
 #else
@@ -169,7 +169,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
         {
             UdpTrackerMessage m = new ConnectResponseMessage(connectMessage.TransactionId, CreateConnectionID());
             byte[] data = m.Encode();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener.SendAsync(data, data.Length, endpoint);
 #else
             listener.Send(data, data.Length, endpoint);
@@ -231,7 +231,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
                 m = new AnnounceResponseMessage(announceMessage.TransactionId, interval, leechers, seeders, peers);
             }
             byte[] data = m.Encode();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener.SendAsync(data, data.Length, endpoint);
 #else
             listener.Send(data, data.Length, endpoint);
@@ -296,7 +296,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
                     {
                         m = new ScrapeResponseMessage(scrapeMessage.TransactionId, scrapes);
                         data = m.Encode();
-#if IS_CORECLR
+#if NETSTANDARD1_5
                         listener.SendAsync(data, data.Length, endpoint);
 #else
                         listener.Send(data, data.Length, endpoint);
@@ -307,7 +307,7 @@ namespace System.Net.BitTorrent.Tracker.Listeners
                 m = new ScrapeResponseMessage(scrapeMessage.TransactionId, scrapes);
             }
             data = m.Encode();
-#if IS_CORECLR
+#if NETSTANDARD1_5
             listener.SendAsync(data, data.Length, endpoint);
 #else
             listener.Send(data, data.Length, endpoint);

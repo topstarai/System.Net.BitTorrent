@@ -63,7 +63,7 @@ namespace System.Net.BitTorrent
             }
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         public async override void Start()
 #else
         public override void Start()
@@ -72,7 +72,7 @@ namespace System.Net.BitTorrent
             try
             {
                 client = new UdpClient(Endpoint);
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 var receiveTask = client.ReceiveAsync();
                 RaiseStatusChanged(ListenerStatus.Listening);
                 var result = await receiveTask;
@@ -92,7 +92,7 @@ namespace System.Net.BitTorrent
             }
         }
 
-#if IS_CORECLR
+#if NETSTANDARD1_5
         private async void EndReceive(UdpReceiveResult result)
         {
             try
@@ -184,7 +184,7 @@ namespace System.Net.BitTorrent
         {
             try
             {
-#if IS_CORECLR
+#if NETSTANDARD1_5
                 client.Dispose();
 #else
                 client.Close();

@@ -58,7 +58,7 @@ namespace System.Net.BitTorrent.Client
 
             ManualResetEvent handle = new ManualResetEvent(false);
             loop.QueueWait((MainLoopTask)delegate { handle.Set(); });
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), "#2");
 #else
             Assert.True(handle.WaitOne(5000, true), "#2");
@@ -80,7 +80,7 @@ namespace System.Net.BitTorrent.Client
 
                 return true;
             });
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), $"#1: Executed {count} times");
 #else
             Assert.True(handle.WaitOne(5000, true), $"#1: Executed {count} times");
@@ -102,7 +102,7 @@ namespace System.Net.BitTorrent.Client
 
                 return true;
             });
-#if IS_CORECLR
+#if NETSTANDARD1_5
             Assert.True(handle.WaitOne(5000), $"#1: Executed {count} times");
 #else
             Assert.True(handle.WaitOne(5000, false), $"#1: Executed {count} times");

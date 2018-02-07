@@ -81,7 +81,7 @@ namespace System.Net.BitTorrent.Client
             {
                 SupportsSparse = false;
             }
-#if IS_CORECLR
+#if NETSTANDARD1_5
             catch (Exception ex)
             {
                 if (ex.HResult == unchecked((int)0x80131523))
