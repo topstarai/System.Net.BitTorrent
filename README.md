@@ -1,11 +1,11 @@
 # BitTorrent
-BitTorrent is from monoTorrent. It's made to support MS.NET 4.5, net standard1.5, net coreapp1.0 and mono.
+BitTorrent is from monoTorrent. It's made to support MS.NET 4.5 or 4.6, net standard1.5 or 2.0, net coreapp1.0 or 2.0 and mono.
  
 
 PRE-REQUISITES
 ------------------------------------------------------------------------------------------------------------
 
-To run: MS.NET 4.5,netstandard1.5,netcoreapp1.0 or Mono 1.1.16.1+
+To run: MS.NET 4.5,netstandard1.5 or 2.0,netcoreapp1.0 or 2.0 or Mono 1.1.16.1+
 To build: MonoDevelop, Visual Studio, SharpDevelop or the standard *nix toolchain
 
 
